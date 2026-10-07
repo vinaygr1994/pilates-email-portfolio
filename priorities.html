@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Your Follow-up Priorities | Process IQ Automation</title>
+<meta name="robots" content="noindex"/>
+<link rel="icon" type="image/png" sizes="32x32" href="https://processiqautomation.com/favicon-32.png"/>
+<style>
+:root{--bg:#f6f4ee;--fg:#1a2332;--muted:#536260;--accent:#387684;--card:#ffffff;--line:#e3ded3;--chip:#ffffff;--chipb:#bfd3d2}
+@media (prefers-color-scheme:dark){:root{--bg:#121a1f;--fg:#e5ecea;--muted:#9aaba6;--accent:#8fc6cc;--card:#1a242b;--line:#2c3a40;--chip:#1f2b32;--chipb:#33464d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 Arial,Helvetica,sans-serif;padding-inline:16px;padding-block:36px}
+main{max-width:600px;margin:0 auto}
+.brand{font:normal 20px Georgia,serif;margin-bottom:26px}
+.brand small{display:block;font:bold 9px Arial,sans-serif;letter-spacing:3px;color:var(--accent)}
+.bar{display:flex;gap:6px;margin:0 0 10px}
+.bar i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.bar i.on{background:var(--accent)}
+.eyebrow{font:bold 11px/16px Arial,sans-serif;letter-spacing:2px;color:var(--accent);margin:0 0 18px}
+h1{font:normal 30px/36px Georgia,'Times New Roman',serif;margin:0 0 22px;text-wrap:balance}
+.opts{display:grid;gap:10px}
+.opts button{all:unset;cursor:pointer;padding:16px 18px;border:1px solid var(--chipb);border-radius:10px;background:var(--chip);font-weight:bold;color:var(--fg)}
+.opts button:hover{border-color:var(--accent)}
+.opts button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.picked{margin:0 0 22px;display:flex;flex-wrap:wrap;gap:6px}
+.picked span{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--muted)}
+.back{all:unset;cursor:pointer;margin-top:18px;font-size:14px;color:var(--muted);text-decoration:underline}
+.back:focus-visible{outline:2px solid var(--accent)}
+.step{animation:rise .35s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.step{animation:none}}
+.result{background:#1a2332;color:#fff;border-radius:14px;padding:28px 26px;margin-top:6px}
+.result .eyebrow{color:#8fc6cc;margin-bottom:8px}
+.result h2{font:normal 25px/31px Georgia,serif;margin:0 0 10px}
+.result p{color:#c3cfd2;margin:0 0 14px}
+.result .for{background:#24384a;border-radius:8px;padding:11px 14px;color:#d2dedb;font-size:14px;margin-bottom:18px}
+.result .for b{color:#d9b48a}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0 0 22px;font-size:14px}
+dt{color:var(--muted)}dd{margin:0;font-weight:bold}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+a.btn{display:inline-block;padding:13px 20px;border-radius:4px;background:#f6f4ee;color:#1a2332;font-weight:bold;text-decoration:none}
+a.alt{display:inline-block;padding:12px 19px;border-radius:4px;border:1px solid #8fc6cc;color:#8fc6cc;font-weight:bold;text-decoration:none}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.foot{margin-top:30px;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<div class="brand">Process IQ<small>AUTOMATION</small></div>
+<div id="app" aria-live="polite"></div>
+<p class="foot">Vinay Kumar Gaur · Process IQ Automation · <a href="/" style="color:inherit">See 8 live Pilates email examples</a></p>
+</main>
+<script>
+const Q=[
+ {k:"q1",t:"What type of Pilates business do you run?",o:["Studio","Academy","Equipment brand","Coaching"]},
+ {k:"q2",t:"Which tool manages your enquiries today?",o:["HubSpot","Salesforce","Booking platform","Spreadsheets","Other"]},
+ {k:"q3",t:"Where does follow-up need the most attention?",o:["New enquiries","Course interest","Quotes","Member retention"]},
+ {k:"q4",t:"What would a better outcome look like?",o:["More bookings","More enrolments","Faster quotes","Less manual work"]}
+];
+const WIN={replies:{t:"An instant, personal first reply.",b:"Every enquiry gets a relevant answer within a minute, logged in your CRM with an owner."},
+ convert:{t:"A short conversion journey.",b:"A few well-timed emails that answer the questions people have before they commit, and stop the moment they do."},
+ quiet:{t:"A win-back and renewal journey.",b:"Triggered by inactivity or a date, using each person's own history so it reads like a personal note."}};
+const GAP={"New enquiries":"replies","Course interest":"convert","Quotes":"convert","Member retention":"quiet"};
+const FOR={replies:{Studio:"an intro-pass confirmation that suggests the best first class.",Academy:"a course guide with dates, cost and the next intake.","Equipment brand":"a quote confirmation with lead time and a named rep.",Coaching:"a same-minute reply with your mentorship options and a booking link."},
+ convert:{Studio:"intro pass → first class → membership offer before it expires.",Academy:"course enquiry → info session → seats-left reminder.","Equipment brand":"quote → buyer FAQs → price-hold reminder.",Coaching:"enquiry → discovery call → programme start date."},
+ quiet:{Studio:"30 quiet days → their usual class and instructor.",Academy:"certification renewal at 60, 30 and 7 days.","Equipment brand":"service and accessory follow-ups after delivery.",Coaching:"a check-in when a client's programme ends."}};
+let A={};
+function read(){A={};try{const p=new URLSearchParams(location.search);Q.forEach(q=>{const v=p.get(q.k);if(v&&q.o.includes(v))A[q.k]=v;});}catch(e){}}
+function write(){const p=new URLSearchParams();Q.forEach(q=>{if(A[q.k])p.set(q.k,A[q.k]);});try{history.pushState(null,"","?"+p.toString());}catch(e){}}
+function el(tag,attrs,text){const e=document.createElement(tag);Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,v));if(text!=null)e.textContent=text;return e;}
+function render(){
+ const app=document.getElementById("app");app.innerHTML="";
+ const idx=Q.findIndex(q=>!A[q.k]);
+ const wrap=el("div",{class:"step"});
+ const bar=el("div",{class:"bar","aria-hidden":"true"});Q.forEach((_,i)=>bar.appendChild(el("i",{class:(idx===-1||i<=idx)?"on":""})));wrap.appendChild(bar);
+ if(idx!==-1){
+  const q=Q[idx];
+  wrap.appendChild(el("p",{class:"eyebrow"},`QUESTION ${idx+1} OF ${Q.length}`));
+  const picked=el("div",{class:"picked"});Q.slice(0,idx).forEach(p=>picked.appendChild(el("span",{},A[p.k])));if(idx>0)wrap.appendChild(picked);
+  wrap.appendChild(el("h1",{},q.t));
+  const opts=el("div",{class:"opts"});
+  q.o.forEach(o=>{const b=el("button",{type:"button"},o);b.onclick=()=>{A[q.k]=o;write();render();};opts.appendChild(b);});
+  wrap.appendChild(opts);
+  if(idx>0){const back=el("button",{type:"button",class:"back"},"← Back");back.onclick=()=>{delete A[Q[idx-1].k];write();render();};wrap.appendChild(back);}
+ }else{
+  wrap.appendChild(el("p",{class:"eyebrow"},"ALL FOUR ANSWERED"));
+  wrap.appendChild(el("h1",{},"Here is your quickest win."));
+  const dl=el("dl");[["Business",A.q1],["Enquiry tool",A.q2],["Needs attention",A.q3],["Goal",A.q4]].forEach(([k,v])=>{dl.appendChild(el("dt",{},k));dl.appendChild(el("dd",{},v));});wrap.appendChild(dl);
+  const g=GAP[A.q3]||"replies",w=WIN[g];
+  const r=el("section",{class:"result"});
+  r.appendChild(el("p",{class:"eyebrow"},"YOUR QUICK WIN"));r.appendChild(el("h2",{},w.t));r.appendChild(el("p",{},w.b));
+  const f=el("div",{class:"for"});f.appendChild(el("b",{},"For you: "));f.appendChild(document.createTextNode(FOR[g][A.q1]+" Built in "+A.q2+"."));r.appendChild(f);
+  const row=el("div",{class:"row"});
+  const body=`Hi Vinay,\n\nHere are my follow-up priorities:\n\n1. Business type: ${A.q1}\n2. Enquiry tool: ${A.q2}\n3. Needs attention: ${A.q3}\n4. Goal: ${A.q4}\n\nPlease send me the quick-win plan.\n\nBusiness name:\n`;
+  const m=el("a",{class:"btn",href:"mailto:info@processiqautomation.com?subject="+encodeURIComponent("My Pilates follow-up priorities")+"&body="+encodeURIComponent(body)},"Send my answers");
+  row.appendChild(m);row.appendChild(el("a",{class:"alt",href:"https://processiqautomation.com/contact"},"Book a 15-min call"));
+  r.appendChild(row);wrap.appendChild(r);
+  const back=el("button",{type:"button",class:"back"},"← Change an answer");back.onclick=()=>{delete A.q4;write();render();};wrap.appendChild(back);
+ }
+ app.appendChild(wrap);
+}
+window.addEventListener("popstate",()=>{read();render();});
+read();render();
+</script>
+</body>
+</html>
