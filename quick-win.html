@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Your Quick Win | Process IQ Automation</title>
+<meta name="robots" content="noindex"/>
+<link rel="icon" type="image/png" sizes="32x32" href="https://processiqautomation.com/favicon-32.png"/>
+<style>
+:root{--bg:#f6f4ee;--fg:#1a2332;--muted:#536260;--accent:#387684;--card:#ffffff;--line:#e3ded3;--navy:#1a2332;--navy-fg:#ffffff;--navy-muted:#c3cfd2;--sand:#d9b48a;--tint:#24384a}
+@media (prefers-color-scheme:dark){:root{--bg:#121a1f;--fg:#e5ecea;--muted:#9aaba6;--accent:#8fc6cc;--card:#1a242b;--line:#2c3a40}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 Arial,Helvetica,sans-serif;padding-inline:16px;padding-block:40px}
+main{max-width:620px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;font:normal 20px Georgia,serif;margin-bottom:28px}
+.brand small{display:block;font:bold 9px Arial,sans-serif;letter-spacing:3px;color:var(--accent)}
+.eyebrow{font:bold 11px/16px Arial,sans-serif;letter-spacing:2px;color:var(--accent);margin:0 0 10px}
+h1{font:normal 34px/40px Georgia,'Times New Roman',serif;margin:0 0 12px;text-wrap:balance}
+.lede{color:var(--muted);margin:0 0 26px}
+.result{background:var(--navy);color:var(--navy-fg);border-radius:14px;padding:30px 28px}
+.result .eyebrow{color:#8fc6cc}
+.result h2{font:normal 26px/32px Georgia,serif;margin:0 0 10px}
+.result p{color:var(--navy-muted);margin:0 0 16px}
+.steps{list-style:none;padding:0;margin:0 0 20px}
+.steps li{background:var(--tint);border-radius:8px;padding:11px 14px;margin-bottom:8px;color:#d2dedb;font-size:14px}
+.steps b{color:var(--sand)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+a.btn{display:inline-block;padding:13px 20px;border-radius:4px;background:#f6f4ee;color:#1a2332;font-weight:bold;text-decoration:none}
+a.alt{display:inline-block;padding:12px 19px;border-radius:4px;border:1px solid #8fc6cc;color:#8fc6cc;font-weight:bold;text-decoration:none}
+.picker{margin-top:28px}
+.picker p{color:var(--muted);font-size:14px;margin:0 0 10px}
+.picker a{display:inline-block;margin:0 6px 8px 0;padding:9px 14px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none;font-size:14px;font-weight:bold}
+.picker a[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.foot{margin-top:30px;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<div class="brand"><span>Process IQ<small>AUTOMATION</small></span></div>
+<p class="eyebrow">YOUR ANSWER IS IN</p>
+<h1 id="h">Here is your quickest win.</h1>
+<p class="lede" id="lede">Based on the answer you tapped in my email. No form needed.</p>
+<section class="result" aria-live="polite">
+<p class="eyebrow">YOUR QUICK WIN</p>
+<h2 id="title"></h2>
+<p id="body"></p>
+<ul class="steps" id="steps"></ul>
+<div class="row">
+<a class="btn" id="mail" href="mailto:info@processiqautomation.com">Send me this plan</a>
+<a class="alt" href="https://processiqautomation.com/contact">Book a 15-min call</a>
+</div>
+</section>
+<div class="picker">
+<p>Not quite right? Pick another:</p>
+<a href="?gap=replies" data-g="replies">Replies take too long</a><a href="?gap=convert" data-g="convert">Interest doesn&rsquo;t convert</a><a href="?gap=quiet" data-g="quiet">People go quiet later</a>
+</div>
+<p class="foot">Vinay Kumar Gaur · Process IQ Automation · <a href="/" style="color:inherit">See 8 live Pilates email examples</a></p>
+</main>
+<script>
+const R={
+ replies:{t:"An instant, personal first reply.",b:"Every enquiry gets a relevant answer within a minute, logged in your CRM with an owner. Often the simplest place to start.",
+  s:[["Studios","an intro-pass confirmation that suggests the best first class."],["Academies","a course guide with dates, cost and the next intake."],["Equipment brands","a quote confirmation with lead time and a named rep."]]},
+ convert:{t:"A short conversion journey.",b:"A few well-timed emails that answer the questions people have before they commit, and stop the moment they do.",
+  s:[["Studios","intro pass → first class → membership offer before it expires."],["Academies","course enquiry → info session → seats-left reminder."],["Equipment brands","quote → buyer FAQs → price-hold reminder."]]},
+ quiet:{t:"A win-back and renewal journey.",b:"Triggered by inactivity or a date, using each person's own history so it reads like a personal note.",
+  s:[["Studios","30 quiet days → their usual class and instructor."],["Academies","certification renewal at 60, 30 and 7 days."],["Equipment brands","service and accessory follow-ups after delivery."]]}
+};
+let g="replies";
+try{const q=new URLSearchParams(location.search).get("gap");if(q&&R[q])g=q;}catch(e){}
+const r=R[g];
+document.getElementById("title").textContent=r.t;
+document.getElementById("body").textContent=r.b;
+const ul=document.getElementById("steps");
+r.s.forEach(([who,what])=>{const li=document.createElement("li");const b=document.createElement("b");b.textContent=who+": ";li.appendChild(b);li.appendChild(document.createTextNode(what));ul.appendChild(li);});
+document.getElementById("mail").href="mailto:info@processiqautomation.com?subject="+encodeURIComponent("Quick win plan: "+r.t)+"&body="+encodeURIComponent("Hi Vinay,\n\nPlease send me this quick-win plan.\n\nBusiness name:\n");
+document.querySelectorAll(".picker a").forEach(a=>a.setAttribute("aria-current",a.dataset.g===g?"true":"false"));
+</script>
+</body>
+</html>
