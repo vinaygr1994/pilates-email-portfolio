@@ -661,6 +661,7 @@ function applyStatic(){
 const $=id=>document.getElementById(id);
 let cur=0, view="preview", mode="sample", device="desk", ro=null;
 try{const s=JSON.parse(localStorage.getItem("pep2")||"{}");if(s.cur!=null&&T[s.cur])cur=s.cur;if(s.device)device=s.device;if(s.mode)mode=s.mode;}catch(e){}
+try{const k=new URLSearchParams(location.search).get("t");const M={welcome:0,profile:1,onboarding:2,launch:3,winback:4,training:5,renewal:6,quote:7};if(k&&M[k]!=null)cur=M[k];}catch(e){}
 function save(){try{localStorage.setItem("pep2",JSON.stringify({cur,device,mode}))}catch(e){}}
 
 const DEMO=`<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a");if(a)e.preventDefault();});document.addEventListener("submit",function(e){e.preventDefault();var f=e.target,d=document.getElementById("pf-done");if(d){f.style.display="none";d.style.display="block";}});})();<\/script>`;
