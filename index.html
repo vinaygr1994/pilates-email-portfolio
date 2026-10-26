@@ -106,6 +106,45 @@ header.top{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justif
 .legend code{font-family:var(--mono);background:var(--amp-bg);color:var(--amp-fg);padding:1px 5px;border-radius:4px;font-size:11.5px}
 footer.foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 @media (prefers-reduced-motion:reduce){.stage iframe{transition:none}}
+.pq{--pq-card:var(--surface);--pq-line:var(--line);--pq-acc:var(--accent);--pq-acc-ink:var(--accent-ink);--pq-soft:var(--chip);--pq-ink:var(--fg);--pq-muted:var(--muted);--pq-field:var(--bg);--pq-display:var(--display)}
+/* ===== Enquiry form ===== */
+.pq{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:36px;align-items:start;background:var(--pq-card);border:1px solid var(--pq-line);border-radius:20px;padding:34px;margin-top:40px;scroll-margin-top:90px}
+.pq-k{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pq-acc);margin:0 0 10px}
+.pq h2{font-family:var(--pq-display);font-size:clamp(26px,3.2vw,38px);line-height:1.08;margin:0 0 12px;color:var(--pq-ink);letter-spacing:-.01em}
+.pq-copy>p{color:var(--pq-muted);margin:0 0 18px;font-size:15.5px}
+.pq-pts{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:10px}
+.pq-pts li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--pq-ink)}
+.pq-pts li::before{content:"✓";flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--pq-soft);color:var(--pq-acc)}
+.pq-img{border-radius:14px;overflow:hidden;aspect-ratio:16/10}
+.pq-img img{width:100%;height:100%;object-fit:cover;display:block}
+.pq-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pq-form label{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--pq-ink)}
+.pq-form label.full{grid-column:1/-1}
+.pq-form label i{font-style:normal;font-weight:500;color:var(--pq-muted)}
+.pq-form input,.pq-form select,.pq-form textarea{font:inherit;font-size:15px;font-weight:400;padding:12px 13px;border:1.5px solid var(--pq-line);border-radius:10px;background:var(--pq-field);color:var(--pq-ink);width:100%;transition:border-color .2s,box-shadow .2s}
+.pq-form textarea{min-height:96px;resize:vertical}
+.pq-form input:focus,.pq-form select:focus,.pq-form textarea:focus{outline:0;border-color:var(--pq-acc);box-shadow:0 0 0 4px var(--pq-soft)}
+.pq-form .pq-err input,.pq-form .pq-err select,.pq-form input.pq-err{border-color:#C0392B}
+.pq-form .chk{display:flex;gap:10px;align-items:flex-start;font-weight:500;color:var(--pq-muted);font-size:13px}
+.pq-form .chk input{width:auto;margin-top:3px;accent-color:var(--pq-acc)}
+.pq-form .chk.pq-err{color:#C0392B}
+.pq-form button{grid-column:1/-1;border:0;border-radius:10px;padding:15px 20px;font:inherit;font-size:16px;font-weight:700;background:var(--pq-acc);color:var(--pq-acc-ink);cursor:pointer;transition:transform .2s,opacity .2s}
+.pq-form button:hover{transform:translateY(-1px)}
+.pq-form button:disabled{opacity:.6;cursor:wait}
+.pq-hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.pq-msg{grid-column:1/-1;margin:0;font-size:13.5px;min-height:0}
+.pq-msg.err{color:#C0392B}
+.pq-note{grid-column:1/-1;margin:-4px 0 0;font-size:12px;color:var(--pq-muted);text-align:center}
+.pq-thanks{display:none;grid-column:1/-1;text-align:center;padding:40px 10px}
+.pq-thanks i{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:var(--pq-soft);color:var(--pq-acc);font-style:normal;font-size:30px;animation:pqpop .5s cubic-bezier(.2,.9,.3,1.4)}
+.pq-thanks b{display:block;font-family:var(--pq-display);font-size:28px;color:var(--pq-ink);margin-bottom:6px}
+.pq-thanks span{color:var(--pq-muted)}
+@keyframes pqpop{from{transform:scale(.4);opacity:0}}
+.pq-form.pq-done{align-self:center}
+.pq-form.pq-done>*:not(.pq-thanks){display:none}
+.pq-form.pq-done .pq-thanks{display:block}
+@media (max-width:860px){.pq{grid-template-columns:minmax(0,1fr);padding:22px;gap:22px}.pq-img{display:none}}
+@media (max-width:520px){.pq-form{grid-template-columns:minmax(0,1fr)}}
 </style>
 
 </head>
@@ -117,7 +156,7 @@ footer.foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);fo
       <h1>Pilates Email Portfolio</h1>
       <p>Eight hand-coded emails for a fictional Pilates brand, Aurelle: welcome, progressive profiling, onboarding, a GIF-led class launch, win-back, teacher training, certification renewal and equipment sales. Several are interactive right inside the inbox. Click through them.</p>
     </div>
-    <div class="byline"><strong>Vinay Kumar Gaur</strong>Process IQ Automation<br><a href="https://processiqautomation.com" target="_blank" rel="noopener">processiqautomation.com</a> · <a href="https://processiqautomation.com/contact" target="_blank" rel="noopener">Book a call</a><br><label class="lang"><span aria-hidden="true">🌐</span><select id="lang" aria-label="Language">
+    <div class="byline"><strong>Vinay Kumar Gaur</strong>Process IQ Automation<br><a href="https://processiqautomation.com" target="_blank" rel="noopener">processiqautomation.com</a> · <a href="#enquire">Book a call</a><br><label class="lang"><span aria-hidden="true">🌐</span><select id="lang" aria-label="Language">
 <option value="en">English</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="it">Italiano</option><option value="nl">Nederlands</option><option value="pt">Português</option></select></label></div>
   </header>
 
@@ -165,6 +204,34 @@ footer.foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);fo
 
     <aside class="notes" id="notes" aria-label="Build notes"></aside>
   </div>
+
+  <section class="pq" id="enquire">
+    <div class="pq-copy">
+      <p class="pq-k">Work with me</p>
+      <h2>Want emails like these for your studio?</h2>
+      <p>Tell me a little about your studio or brand. I'll reply within one business day with ideas for your welcome, intro-offer and win-back emails.</p>
+      <ul class="pq-pts"><li>Free 20-minute email and CRM review</li><li>Built in your platform: SFMC, Klaviyo, Mailchimp or HubSpot</li><li>No obligation, no sales pressure</li></ul>
+      <div class="pq-img"><img src="cold/pilates-studio.jpg" alt="Two women in a bright Pilates studio" loading="lazy"></div>
+    </div>
+    <form class="pq-form" id="pqForm" novalidate>
+      <input type="hidden" name="source" value="Pilates Enquiry">
+      <input type="hidden" name="page"><input type="hidden" name="referrer">
+      <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_content">
+      <div class="pq-hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+      <label>Your name<input name="name" autocomplete="name" required></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required></label>
+      <label><span>Phone <i>(optional)</i></span><input name="phone" type="tel" autocomplete="tel"></label>
+      <label>Studio or brand name<input name="business" autocomplete="organization" required></label>
+      <label>You are a…<select name="business_type" required><option value="">Choose one</option><option>Pilates studio</option><option>Multi-location studio</option><option>Teacher-training academy</option><option>Equipment or apparel brand</option><option>Other fitness business</option></select></label>
+      <label>Interested in<select name="interest" required><option value="">Choose one</option><option>Email marketing</option><option>CRM setup</option><option>Email + CRM</option><option>Not sure yet</option></select></label>
+      <label class="full"><span>What would you like help with? <i>(optional)</i></span><textarea name="message" placeholder="e.g. a welcome series for new clients, or more intro-pass bookings"></textarea></label>
+      <label class="chk full"><input type="checkbox" name="consent" value="Yes" required>I agree to be contacted by Process IQ Automation about my enquiry.</label>
+      <p class="pq-msg" role="alert"></p>
+      <button type="submit">Send my enquiry &rarr;</button>
+      <p class="pq-note">Goes straight to Vinay. Your details are never shared.</p>
+      <div class="pq-thanks" aria-live="polite"><i>&#10003;</i><b>Thanks!</b><span>Your enquiry is in. I'll reply within one business day.</span></div>
+    </form>
+  </section>
 
   <footer class="foot">
     <span>Aurelle Pilates Co. is a fictional brand. Names, prices and addresses are illustrative.</span>
@@ -733,6 +800,41 @@ $("lang").onchange=e=>{lang=e.target.value;try{localStorage.setItem("pep-lang",l
 applyStatic();
 render();
 })();
+
+/* ===== Enquiry form → Google Sheet (Apps Script) ===== */
+(function(){
+const ENDPOINT=""; /* Apps Script web app URL goes here */
+const f=document.getElementById("pqForm");if(!f)return;
+const t0=Date.now();
+const q=new URLSearchParams(location.search);
+const set=(n,v)=>{const el=f.querySelector(`[name="${n}"]`);if(el)el.value=v||"";};
+["utm_source","utm_medium","utm_campaign","utm_content"].forEach(k=>set(k,q.get(k)));
+set("page",location.href.split("#")[0]);set("referrer",document.referrer);
+const msg=f.querySelector(".pq-msg"),btn=f.querySelector("button[type=submit]");
+f.addEventListener("input",e=>{const l=e.target.closest(".pq-err");if(l)l.classList.remove("pq-err");e.target.classList.remove("pq-err");});
+f.addEventListener("submit",async e=>{
+ e.preventDefault();msg.className="pq-msg";msg.textContent="";
+ const bad=[...f.querySelectorAll("[required]")].filter(el=>el.type==="checkbox"?!el.checked:!el.value.trim()||(el.type==="email"&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value)));
+ f.querySelectorAll(".pq-err").forEach(el=>el.classList.remove("pq-err"));
+ if(bad.length){bad.forEach(el=>(el.closest("label")||el).classList.add("pq-err"));msg.className="pq-msg err";msg.textContent="Please fill in the highlighted fields.";bad[0].focus();return;}
+ if(f.website.value||Date.now()-t0<2500){msg.className="pq-msg ok";msg.textContent="Thanks!";return;}
+ const data=new URLSearchParams(new FormData(f));
+ btn.disabled=true;const old=btn.innerHTML;btn.innerHTML="Sending…";
+ try{
+  if(!ENDPOINT){
+   const body=[...data].filter(([k,v])=>v&&!["website","page","referrer"].includes(k)).map(([k,v])=>`${k}: ${v}`).join("\n");
+   location.href=`mailto:info@processiqautomation.com?subject=${encodeURIComponent(data.get("source")+" · "+data.get("name"))}&body=${encodeURIComponent(body)}`;
+  }else{
+   await fetch(ENDPOINT,{method:"POST",mode:"no-cors",body:data});
+  }
+  f.classList.add("pq-done");
+  f.querySelector(".pq-thanks b").textContent=`Thanks, ${data.get("name").split(" ")[0]}!`;
+ }catch(err){
+  msg.className="pq-msg err";msg.textContent="Something went wrong. Please email info@processiqautomation.com.";
+ }finally{btn.disabled=false;btn.innerHTML=old;}
+});
+})();
+
 </script>
 
 </body>
