@@ -825,12 +825,17 @@ f.addEventListener("submit",async e=>{
    const body=[...data].filter(([k,v])=>v&&!["website","page","referrer"].includes(k)).map(([k,v])=>`${k}: ${v}`).join("\n");
    location.href=`mailto:info@processiqautomation.com?subject=${encodeURIComponent(data.get("source")+" · "+data.get("name"))}&body=${encodeURIComponent(body)}`;
   }else{
-   await fetch(ENDPOINT,{method:"POST",mode:"no-cors",body:data});
+   const r=await fetch(ENDPOINT,{method:"POST",body:data});
+   const j=await r.json();
+   if(!j.ok)throw new Error(j.error||"not saved");
   }
   f.classList.add("pq-done");
   f.querySelector(".pq-thanks b").textContent=`Thanks, ${data.get("name").split(" ")[0]}!`;
  }catch(err){
-  msg.className="pq-msg err";msg.textContent="Something went wrong. Please email info@processiqautomation.com.";
+  console.warn("[pqForm] save failed:",err&&err.message);
+  const body=[...data].filter(([k,v])=>v&&!["website","referrer"].includes(k)).map(([k,v])=>`${k}: ${v}`).join("\n");
+  const mail=`mailto:info@processiqautomation.com?subject=${encodeURIComponent(data.get("source")+" · "+data.get("name"))}&body=${encodeURIComponent(body)}`;
+  msg.className="pq-msg err";msg.innerHTML=`Sorry, your enquiry couldn't be sent automatically. <a href="${mail}" style="color:inherit;font-weight:700;text-decoration:underline">Send it by email instead &rarr;</a>`;
  }finally{btn.disabled=false;btn.innerHTML=old;}
 });
 })();
